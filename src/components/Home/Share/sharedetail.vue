@@ -8,7 +8,7 @@
         <ul class="mui-table-view mui-grid-view mui-grid-9">
             <li v-for="(item,index) in images" :key="index" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
                 <a href="#">
-                   <img :src="item.src" alt="">
+                   <img class="preview-img" @click="$preview.open(index, images)" height="100" :src="item.src">
                 </a>
             </li>
         </ul> 
@@ -22,6 +22,10 @@
 </template>
 
 <script>
+//一个Vue集成PhotoSwipe图片预览插件npm i vue-preview -S
+import Vue from 'vue'
+import VuePreview from 'vue-preview'
+Vue.use(VuePreview)
 import comment from '../../public/comment.vue'
 export default {
   components:{
@@ -55,7 +59,11 @@ export default {
           this.$http.get(url).then(res=>{
             //   console.log(res)
               if(res.status===200&&res.data.status===0){
-                  this.images=res.data.message
+                  this.images=res.data.message;
+                  this.images.forEach(item=>{
+                      item.h=500;
+                      item.w=500;
+                  })
               }
           })
       }
