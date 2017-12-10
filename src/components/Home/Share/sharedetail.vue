@@ -17,8 +17,8 @@
 
         <!-- 评论--> 
         <!-- cid是要和comment.vue中的url地址中的一致 -->
-    <comment :cid="id"></comment>
-</div>
+        <comment :cid="id"></comment>
+    </div>
 </template>
 
 <script>
@@ -26,6 +26,7 @@
 import Vue from 'vue'
 import VuePreview from 'vue-preview'
 Vue.use(VuePreview)
+
 import comment from '../../public/comment.vue'
 export default {
   components:{

@@ -18,6 +18,7 @@ import share from '../components/Home/share/share.vue'
 
 import newsdetail from '../components/Home/News/newsdetail.vue'
 import sharedetail from '../components/Home/Share/sharedetail.vue'
+import buydetail from '../components/Home/Buy/buydetail.vue'
 export default new VueRouter({
     linkActiveClass: 'mui-active',
     routes: [
@@ -33,6 +34,7 @@ export default new VueRouter({
         { path: '/video', component: video },
         { path: '/share', component: share },
         { name: 'newsdetail', path: '/news/:id', component: newsdetail, props: true },
-        { name: 'sharedetail', path: '/share/:id', component: sharedetail, props: true }
+        { name: 'sharedetail', path: '/share/:id', component: sharedetail, props: true },
+        { name: 'buydetail', path: '/news/:id', component: buydetail, props: true }
     ]
 })
