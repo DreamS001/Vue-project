@@ -2,7 +2,7 @@
     <!-- <h1>这是demo页</h1> -->
     <div class="mui-content">
         <header class="mui-bar mui-bar-nav">
-			<!-- <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a> -->
+			<a v-if="isshow" @click="goback" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title"><span>Buy+</span>商城</h1>
 		</header>
 		<nav class="mui-bar mui-bar-tab">
@@ -28,7 +28,38 @@
 </template>
 <script>
     export default{
-       
+	   data(){
+		   return {
+			  isshow:false 
+		   }
+	   },
+       methods:{
+		   goback(){
+			   this.$router.back()
+		   },
+		   back(path){
+			   let arr =['/home','/menber','/search','/shopcar']
+			   if(arr.indexOf(path)==-1){
+				   this.isshow=true;
+			   }else{
+				   this.isshow=false;
+			   }
+		   }
+	   },
+	   created(){
+			this.back(this.$route.path)
+	   },
+	   watch:{
+		   '$route':function(newValue){
+			//    let arr =['/home','/menber','/search','/shopcar']
+			//    if(arr.indexOf(newValue.path)==-1){
+			// 	   this.isshow=true;
+			//    }else{
+			// 	   this.isshow=false;
+			//    }
+			this.back(newValue.path)
+		   }
+	   }
     }
 </script>
 
