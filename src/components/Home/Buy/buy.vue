@@ -1,25 +1,27 @@
 <template>
     <div class="mui-content">
-        <ul>
-            <li v-for="item in goods" :key="item.id">
-                <router-link :to="{name:'buydetail',params:{id:item.id}}">
-                    <img :src="item.img_url" alt="">
-                </router-link>
-                <div class="buyBox">
-                    <h5 class="title">{{item.title}}</h5>
-                    <div class="box">
-                        <p>
-                            <span class="newprice">￥{{item.sell_price}}</span>
-                            <span class="oldprice">￥{{item.market_price}}</span>
-                        </p>
-                        <p>
-                            <span class="hot mui-pull-left">热卖中</span>
-                            <span class="lib mui-pull-right">剩{{item.stock_quantity}}件</span>
-                        </p>
+        <mt-loadmore :autoFill="false" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
+            <ul>
+                <li v-for="item in goods" :key="item.id">
+                    <router-link :to="{name:'buydetail',params:{id:item.id}}">
+                        <img :src="item.img_url" alt="">
+                    </router-link>
+                    <div class="buyBox">
+                        <h5 class="title">{{item.title}}</h5>
+                        <div class="box">
+                            <p>
+                                <span class="newprice">￥{{item.sell_price}}</span>
+                                <span class="oldprice">￥{{item.market_price}}</span>
+                            </p>
+                            <p>
+                                <span class="hot mui-pull-left">热卖中</span>
+                                <span class="lib mui-pull-right">剩{{item.stock_quantity}}件</span>
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </mt-loadmore>
     </div>
 </template>
 
@@ -27,7 +29,8 @@
 export default {
   data(){
       return {
-          goods:[]
+          goods:[],
+          allLoaded:false
       }
   },
   created(){
@@ -42,7 +45,12 @@ export default {
                   this.goods=res.data.message
               }
           })
-      }
+      },
+    loadBottom() {
+        // 加载更多数据
+        console.log(1)
+        // this.$refs.loadmore.onBottomLoaded();
+    }
   }
 }
 </script>

@@ -1,3 +1,15 @@
 .newsContent {
     padding: 0 10px;
 }
+
+.newsContent img {
+    width: 100%;
+}
+
+.newsContent table {
+    width: 100%;
+}
+
+body {
+    background-color: #fff;
+}

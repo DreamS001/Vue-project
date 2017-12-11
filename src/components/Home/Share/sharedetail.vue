@@ -7,9 +7,7 @@
 
         <ul class="mui-table-view mui-grid-view mui-grid-9">
             <li v-for="(item,index) in images" :key="index" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                <a href="#">
-                   <img class="preview-img" @click="$preview.open(index, images)" height="100" :src="item.src">
-                </a>
+                <img class="preview-img" @click="$preview.open(index, images)" height="100" :src="item.src">
             </li>
         </ul> 
 
