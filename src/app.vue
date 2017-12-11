@@ -15,7 +15,7 @@
 				<span class="mui-tab-label">搜索</span>
 			</router-link>
             <router-link class="mui-tab-item" to="/shopcar">
-				<span class="mui-icon mui-icon-contact"><span class="mui-badge">0</span></span>
+				<span class="mui-icon mui-icon-contact"><span class="mui-badge">{{Num}}</span></span>
 				<span class="mui-tab-label">购物车</span>
 			</router-link>
             <router-link class="mui-tab-item" to="/search">
@@ -51,9 +51,10 @@ import eventHub from '../src/config/communication.js'
 	   created(){
 			this.back(this.$route.path)
 			eventHub.$on('updateNum',function(num){
-				console.log(num)
+				// console.log(num)
 				this.Num=num
 				console.log(this.Num)
+
 			})
 	   },
 	   watch:{

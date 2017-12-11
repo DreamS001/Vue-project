@@ -76,7 +76,7 @@ export default {
       this.$router.push({name:'goodsdesc',params:{id:this.id}})
     },
     lisentChildNum(count){
-      console.log(count)
+      // console.log(count)
       this.num=count
     },
     addCar(){

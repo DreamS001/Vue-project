@@ -1,5 +1,5 @@
 <template>
-    <div class="mui-content">
+    <div ref="height" class="mui-content">
         <mt-loadmore :autoFill="false" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
             <ul>
                 <li v-for="item in goods" :key="item.id">
@@ -26,11 +26,13 @@
 </template>
 
 <script>
+
 export default {
   data(){
       return {
           goods:[],
-          allLoaded:false
+          allLoaded:false,
+          pageindex:1
       }
   },
   created(){
@@ -38,18 +40,30 @@ export default {
   },
   methods:{
       getgoodslist(){
-          let url='getgoods?pageindex=1'
+          let url='getgoods?pageindex='+this.pageindex
           this.$http.get(url).then(res=>{
             //   console.log(res)
               if(res.status===200&&res.data.status===0){
-                  this.goods=res.data.message
+                  if(res.data.message.length===0){
+                      this.allLoaded = true;
+                    //   return;
+                  }
+                  this.goods=this.goods.concat(res.data.message)
+                  //上拉加载关键语句
+                  this.$refs.loadmore.onBottomLoaded();
               }
+              const height=document.documentElement.clientHeight;
+              this.$refs.height.style.height= height+'px'
           })
       },
     loadBottom() {
+        //上拉加载
         // 加载更多数据
-        console.log(1)
-        // this.$refs.loadmore.onBottomLoaded();
+        this.pageindex++
+        this.getgoodslist()
+        // console.log(1)
+        
+        
     }
   }
 }
@@ -107,5 +121,8 @@ p{
 }
 .oldprice{
     text-decoration-line: line-through;
+}
+.mint-loadmore {
+    padding-bottom: 50px
 }
 </style>
